@@ -3,7 +3,7 @@ import parse from 'html-react-parser'
 import PlainLayout from '@/components/master/PlainLayout';
 
 async function getData() {
-    let data = (await(await fetch(`${process.env.HOST}/api/policy?type=terms`, { cache: 'no-store' })).json())['data']
+    let data = (await(await fetch(`${process.env.HOST}/api/policy?type=terms`)).json())['data']
     return data;
 }
 

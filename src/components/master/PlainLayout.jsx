@@ -1,6 +1,7 @@
 import React from 'react';
 import AppNavBar from './AppNavBar';
 import Footer from './Footer';
+import {Toaster} from 'react-hot-toast'
 
 
 async function getData(){
@@ -17,6 +18,7 @@ const PlainLayout = async (props) => {
         <>
             <AppNavBar data={data}/>
             {props.children}
+            <Toaster position='bottom-center' />
             <Footer data={data}/>
         </>
     );

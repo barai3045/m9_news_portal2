@@ -1,8 +1,14 @@
+"use client"
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
+import { CiSearch } from "react-icons/ci";
 
 
 const AppNavBar = (props) => {
+
+    let [keyword, setKeyword] = useState("") 
+
+
     return (
         
         <div>
@@ -13,10 +19,10 @@ const AppNavBar = (props) => {
                         <h6> Today: <span> {new Date().getDay()}/{new Date().getMonth()+1}/{new Date().getFullYear()}</span></h6>
                     </div>
                     <span>
-                        <a target="_blank" className="text-white" href={""}><i className="mx-2 bi bi-facebook"></i></a>
-                        <a target="_blank" className="text-white" href={""}><i className="mx-2 bi bi-youtube"></i></a>
-                        <a target="_blank" className="text-white" href={""}><i className="mx-2 bi bi bi-twitter"></i></a>
-                        <a target="_blank" className="text-white" href={""}><i className="mx-2 bi bi-linkedin"></i></a>
+                        <a target="_blank" className="text-white" href={props.data['socials'][0]['facebook']}><i className="mx-2 bi bi-facebook"></i></a>
+                        <a target="_blank" className="text-white" href={props.data['socials'][0]['youtube']}><i className="mx-2 bi bi-youtube"></i></a>
+                        <a target="_blank" className="text-white" href={props.data['socials'][0]['twitter']}><i className="mx-2 bi bi bi-twitter"></i></a>
+                        <a target="_blank" className="text-white" href={props.data['socials'][0]['linkedin']}><i className="mx-2 bi bi-linkedin"></i></a>
                     </span>
                 </div>
             </div>
@@ -28,8 +34,8 @@ const AppNavBar = (props) => {
                     {
                         props.data['category'].map((item, i)=>{
                             return (
-                                <Link className="px-2 text-xl font-medium" href={`/category?id=${item['id']}`} >
-                                    <div key={i} > 
+                                <Link key={i}  href={`/category?id=${item['id']}`} >
+                                    <div className="px-2 text-xl font-medium" key={i} > 
                                     { item['name']} 
                                     </div>
                                 </Link>
@@ -38,14 +44,12 @@ const AppNavBar = (props) => {
                     }
                     </div>
                     
-                    <div className='flex gap-2'>
-                    <div className="relative " >
-                        <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                        <img src={"/images/search.svg"} className='h-5 pe-1' alt='news-logo' />
-                        </div>
-                        <input type="text" id="search-navbar" className="block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..."/>
-                    </div>
-                    <Link href="/user/login" className="py-2 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-blue-700 hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100">Login</Link>
+                    <div className='flex items-center gap-2'>
+                    <input type="text" onChange={(e)=>{setKeyword(e.target.value)}}  className="w-56 h-10 px-2  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Search..."/>
+                    <Link href={ keyword===""?("/"):(`/search?keyword=${keyword}`) }>
+                    <div className='p-2 rounded-md text-2xl font-bold bg-red-500 hover:bg-blue-600 cursor-pointer text-white'> <CiSearch/> </div> 
+                    </Link>
+                    <Link href="/user/login" className="py-2 px-5 me-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-blue-700 hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100">Login</Link>
                     </div>
                 </nav>
             </div>

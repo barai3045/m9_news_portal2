@@ -1,4 +1,7 @@
+import PlainLayout from '@/components/master/PlainLayout';
 import NewsCard from '@/components/news/NewsCard';
+import Popular from '@/components/news/Popular';
+import Subscribe from '@/components/news/Subscribe';
 import React from 'react';
 
 async function getData(keyword) {
@@ -31,14 +34,17 @@ const page = async (props) => {
                         </div>
                             <Popular data={data}/>
                             
+                            
                         <div className="bg-black rounded text-white p-2 mt-3">
                             <span >SUBSCRIBE</span>
                         </div>
-                        <Subscribe/>  
+                        <Subscribe/> 
+                         
                     </div>
                 </div>
             </div>
         </PlainLayout>
+        
     );
 };
 
